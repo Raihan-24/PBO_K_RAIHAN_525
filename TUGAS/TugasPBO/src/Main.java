@@ -1,32 +1,6 @@
 // Kelas LoginSystem (Main)
 import java.util.Scanner;
 
-// Kelas Admin
-class Admin {
-    private String username = "Admin525";
-    private String password = "Password525";
-
-    public boolean login(String inputUsername, String inputPassword) {
-        return username.equals(inputUsername) && password.equals(inputPassword);
-    }
-}
-
-// Kelas Mahasiswa
-class Mahasiswa {
-    private String nama = "Raihan Ghifari Alfatah";
-    private String nim = "525";
-
-    public boolean login(String inputNama, String inputNim) {
-        return nama.equals(inputNama) && nim.equals(inputNim);
-    }
-
-    public void displayInfo() {
-        System.out.println("Informasi Mahasiswa:");
-        System.out.println("Nama: " + nama);
-        System.out.println("NIM: " + nim);
-    }
-}
-
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
