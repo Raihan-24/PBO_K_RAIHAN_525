@@ -1,4 +1,4 @@
-// Kelas Main
+// Kelas LoginSystem (Main)
 import java.util.Scanner;
 
 public class Main {
@@ -15,15 +15,8 @@ public class Main {
             System.out.println("3. Keluar");
             System.out.print("Masukkan pilihan (1-3): ");
 
-            int pilihan;
-            try {
-                pilihan = scanner.nextInt();
-                scanner.nextLine(); // Membersihkan buffer
-            } catch (Exception e) {
-                System.out.println("Input harus berupa angka!");
-                scanner.nextLine(); // Membersihkan buffer
-                continue;
-            }
+            int pilihan = scanner.nextInt();
+            scanner.nextLine(); // Membersihkan buffer
 
             switch (pilihan) {
                 case 1:
@@ -35,23 +28,25 @@ public class Main {
 
                     if (admin.login(username, password)) {
                         System.out.println("Login Admin berhasil!");
-                        admin.displayInfo();
                     } else {
                         System.out.println("Login gagal! Username atau password salah.");
                     }
                     break;
 
                 case 2:
+                    // Meminta input nama dan NIM
                     System.out.println("\n=== Login Mahasiswa ===");
                     System.out.print("Masukkan Nama: ");
                     String nama = scanner.nextLine();
                     System.out.print("Masukkan NIM: ");
                     String nim = scanner.nextLine();
 
+                    // Verifikasi dan tampilkan info jika sesuai
                     if (mahasiswa.login(nama, nim)) {
                         System.out.println("Login Mahasiswa berhasil!");
-                        mahasiswa.displayInfo();
+                        mahasiswa.displayInfo(); // Menampilkan informasi mahasiswa
                     } else {
+                        // Pesan error jika tidak sesuai
                         System.out.println("Login gagal! Nama atau NIM salah.");
                     }
                     break;
@@ -62,6 +57,7 @@ public class Main {
                     break;
 
                 default:
+                    // Pesan error untuk pilihan tidak valid
                     System.out.println("Pilihan tidak valid!");
             }
         }
