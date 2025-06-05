@@ -1,11 +1,17 @@
 package com.praktikum.users;
 
 import com.praktikum.actions.MahasiswaActions;
+import com.praktikum.main.LoginSystem;
+import com.praktikum.data.Item;
 import java.util.Scanner;
 
 public class Mahasiswa extends User implements MahasiswaActions {
     public Mahasiswa() {
         super("Raihan Ghifari Alfatah", "525");
+    }
+
+    public Mahasiswa(String nama, String nim) {
+        super(nama, nim);
     }
 
     @Override
@@ -30,12 +36,28 @@ public class Mahasiswa extends User implements MahasiswaActions {
         System.out.print("Lokasi Terakhir/Ditemukan: ");
         String lokasi = scanner.nextLine();
 
+        Item newItem = new Item(namaBarang, deskripsi, lokasi);
+        LoginSystem.reportedItems.add(newItem);
         System.out.println(">> Laporan telah diterima. Terima kasih! <<");
     }
 
-    @Override
+    //@Override
     public void viewReportedItems() {
-        System.out.println(">> Fitur Lihat Laporan Belum Tersedia <<");
+        if (LoginSystem.reportedItems.isEmpty()) {
+            System.out.println("Belum ada laporan barang.");
+            return;
+        }
+
+        System.out.println("\n=== Daftar Laporan Barang ===");
+        //ini Iterasi
+        for (Item item : LoginSystem.reportedItems) {
+            if (item.getStatus().equals("Reported")) {
+                System.out.println("Nama Barang: " + item.getItemName());
+                System.out.println("Deskripsi: " + item.getDescription());
+                System.out.println("Lokasi: " + item.getLocation());
+                System.out.println("-----------------------------");
+            }
+        }
     }
 
     @Override
@@ -48,16 +70,22 @@ public class Mahasiswa extends User implements MahasiswaActions {
             System.out.println("2. Lihat Daftar Laporan");
             System.out.println("0. Logout");
             System.out.print("Pilihan: ");
-            pilihan = scanner.nextInt();
-            scanner.nextLine();
 
-            switch (pilihan) {
-                case 1 -> reportItem();
-                case 2 -> viewReportedItems();
-                case 0 -> System.out.println("Logout...");
-                default -> System.out.println("Pilihan tidak valid.");
+            try {
+                pilihan = scanner.nextInt();
+                scanner.nextLine(); // Clear buffer
+
+                switch (pilihan) {
+                    case 1 -> reportItem();
+                    case 2 -> viewReportedItems();
+                    case 0 -> System.out.println("Logout...");
+                    default -> System.out.println("Pilihan tidak valid.");
+                }
+            } catch (Exception e) {
+                System.out.println("Input harus berupa angka!");
+                scanner.nextLine(); // Clear invalid input
+                pilihan = -1;
             }
         } while (pilihan != 0);
     }
 }
-

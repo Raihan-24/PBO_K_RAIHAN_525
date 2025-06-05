@@ -1,8 +1,8 @@
 package com.praktikum.users;
 
 public abstract class User {
-    private String nama;
-    private String nim;
+    protected String nama;
+    protected String nim;
 
     public User(String nama, String nim) {
         this.nama = nama;
@@ -18,11 +18,12 @@ public abstract class User {
     }
 
     public abstract boolean login(String param1, String param2);
+
+    public abstract void reportItem();
+
     public abstract void displayAppMenu();
 
-    public void displayInfo() {
-        System.out.println("Nama: " + nama);
-        System.out.println("NIM: " + nim);
+    protected void displayInfo() {
+
     }
 }
-
